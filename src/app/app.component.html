@@ -1,0 +1,26 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top pt-2">
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active"  [routerLink]="['/']" routerLinkActive="router-link-active"><span class="navbar-brand mb-0 h1" >Eco Food</span></a>
+        <a class="nav-item nav-link active"  [routerLink]="['/Products']" routerLinkActive="router-link-active">Products<!--<span class="sr-only">(current)</span>!--></a>
+        <a class="nav-item nav-link active"  [routerLink]="['/Cart']" routerLinkActive="router-link-active">Shoppping Cart<!--<span class="sr-only">(current)</span>!--></a>
+
+        <!--<a class="nav-item nav-link" href="#">Features</a>!-->
+      </div>
+    </div>
+</nav>
+<!--
+<header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
+  <div class="text-center my-5">
+      <img class="img-fluid rounded-circle mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9r1rdpTCFDycGXjYn1skBZ5AjGLgOUUen7w&usqp=CAU"
+      alt="Student Logo" />
+      <h1 class="text-white fs-3 fw-bolder">Eco Food</h1>
+  </div>
+</header>
+!-->
+<router-outlet></router-outlet>
+<!--
+<footer class="py-5 bg-dark ">
+  <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Eco Food 2021</p></div>
+</footer>
+!-->

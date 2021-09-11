@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-center mt-50 mb-50 products">
+        <div class="row">
+          <div *ngFor="let CartItem of CartItems; let i = index" class="col-md-4 mt-2">
+                
+                    <div> {{CartItem.Product}}</div>
+                    <div>  {{CartItem.NumberOfProducts}}</div>
+                    <div>  {{CartItem.TotalPrice}}</div>
+                    
+                   
+                
+         </div>
+
+        </div>
+    </div>
+</body>
+</html>
