@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping</title>
+    <link rel="stylesheet" href="shipping.css">
+</head>
+<body>
+    <h1>Shipping</h1>
+    <div class="row">
+      
+       
+        <div class="col-lg-6" id="div3">
+            <div  class="container">
+            <div class="title" >User Info</div>
+            <div class="content">
+                <form (ngSubmit)="onSubmit()" #f="ngForm">
+    
+          
+                    <div class="mb-3">
+                     <label for="username" class="form-label">Name</label>
+                     <input type="text"
+                      class="form-control" 
+                      id="username"
+                      ngModel
+                      name="name"
+                      required
+                      #name="ngModel">
+                      <span class="error-message" *ngIf="!name.valid && name.touched"> name required</span>
+                    </div>
+                   <div class="mb-3   ">
+                     <label class="form-label" for="useraddress">Address</label>
+                     <input type="text" 
+                     class="form-control" 
+                     id="useraddress"
+                     ngModel
+                     name="address"
+                     required
+                     #address="ngModel">
+                     <span class="error-message" *ngIf="!address.valid && address.touched">gpa required</span>
+                  
+                   </div>
+                   <div class="mb-3   ">
+                    <label class="form-label" for="usercity">city</label>
+                    <input type="text" 
+                    class="form-control" 
+                    id="usercity"
+                    ngModel
+                    name="city"
+                    required
+                    #city="ngModel">
+                    <span class="error-message" *ngIf="!city.valid && city.touched">gpa required</span>
+                 
+                  </div>
+            <button type="submit" class="btn btn-primary " [disabled]="!f.valid">Submit</button>
+            <button type="button" class="btn btn-danger " (click)="resetForm()" >Reset</button>
+        
+             </form>
+
+
+
+
+            </div>
+           </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6"><div class="container">
+            <div class="title" >Order Summary</div>
+             <div class="content">
+           <div>You have {{GetTotalNumOfProducts()}} items in your shopping cart</div>
+           <div *ngFor="let CartItem of CartItems; let i = index" class="col-md-4 mt-2">
+              <hr>          
+            <div>  {{CartItem.numberOfProducts}} * {{GetProductName(CartItem)}}  {{CartItem.totalPrice}}$</div>
+             
+            
+            </div>
+            <hr>
+            <div>Total {{GetTotalPrice()}} $</div>
+         
+              </div>  
+             </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
