@@ -31,7 +31,7 @@ export class ProductComponent implements OnInit {
   };
   count = 1;
   addToCartFlag = false;
-  CartItems: CartItemProductsPage[] | null = [];
+  CartItems: CartItem[] | null = [];
   UserId = 1;
   i = 0;
 
@@ -42,13 +42,29 @@ export class ProductComponent implements OnInit {
     address: "home",
     city: "London"
   }
+  CartItem : CartItem={
+    
+    numberOfProducts :0,
+    totalPrice :0,
+    user:{
+      Id: 0,
+      name: "",
+      address: "",
+      city: ""
+    },
+    product: {
+      id: 0, name: "",
+      picture: "",
+      category: "", price: 0
+    }
+   }
 
 
   constructor(private httpService: ProductService, private httpServiceCart: CartService) { }
 
   ngOnInit(): void {
     this.httpService.getProducts('/api/Product').subscribe(res => { this.products = res.body, console.log(res.body) })
-    this.httpServiceCart.GetUserCartItemsProductsPage('/api/CartItem', this.UserId).subscribe(res => { this.CartItems = res.body, console.log(res.body) })
+    this.httpServiceCart.GetUserCartItems('/api/CartItem', this.UserId).subscribe(res => { this.CartItems = res.body, console.log(res.body) })
     // this.products?.push(this.x); this.products?.push(this.y);
     // this.CartItems?.push({  NumberOfProducts: 2, TotalPrice: 123,  User: this.user,  Product: this.x  });
   }
@@ -64,18 +80,19 @@ export class ProductComponent implements OnInit {
 
   decrementCount(p: product) {
     for (this.i = 0; this.i < this.CartItems!.length; this.i = this.i + 1) {
-      if ((this.CartItems![this.i]).Product === p) {
-        if ((this.CartItems![this.i]).NumberOfProducts == 1) {
+      if ((this.CartItems![this.i]).product === p) {
+        if ((this.CartItems![this.i]).numberOfProducts == 1) {
           
           //delete from backend
 
           return;
         }
         else {
-          (this.CartItems![this.i]).NumberOfProducts = (this.CartItems![this.i]).NumberOfProducts - 1;
-          (this.CartItems![this.i]).TotalPrice = (this.CartItems![this.i]).TotalPrice - p.price;
+          (this.CartItems![this.i]).numberOfProducts = (this.CartItems![this.i]).numberOfProducts - 1;
+          (this.CartItems![this.i]).totalPrice = (this.CartItems![this.i]).totalPrice - p.price;
 
           //put backend
+         
 
           return;
     }}}}
@@ -84,11 +101,14 @@ export class ProductComponent implements OnInit {
 
     incrementCount(p: product) {
       for (this.i = 0; this.i < this.CartItems!.length; this.i = this.i + 1) {
-        if ((this.CartItems![this.i]).Product === p) {
-          (this.CartItems![this.i]).NumberOfProducts = (this.CartItems![this.i]).NumberOfProducts + 1;
-          (this.CartItems![this.i]).TotalPrice = (this.CartItems![this.i]).TotalPrice + p.price;
+        if ((this.CartItems![this.i]).product === p) {
+          (this.CartItems![this.i]).numberOfProducts = (this.CartItems![this.i]).numberOfProducts + 1;
+          (this.CartItems![this.i]).totalPrice = (this.CartItems![this.i]).totalPrice + p.price;
           
           //put backend
+          this.httpServiceCart.IncrementCartItem('/api/CarItem',this.user.Id,p.id,this.CartItem).subscribe(res=>{
+            console.log(res.body)
+          });
           
           return;
       }}}
@@ -96,10 +116,12 @@ export class ProductComponent implements OnInit {
   checkInCart(p: product) {
 
     //get backend
+    this.httpServiceCart.GetUserCartItems('/api/CartItem',this.UserId).subscribe( res => {this.CartItems = res.body ,  console.log(res.body)})
+
 
     for (this.i = 0; this.i < this.CartItems!.length; this.i = this.i + 1) {
-      if ((this.CartItems![this.i]).Product === p) {
-        this.count = (this.CartItems![this.i]).NumberOfProducts;
+      if ((this.CartItems![this.i]).product === p) {
+        this.count = (this.CartItems![this.i]).numberOfProducts;
         this.addToCartFlag = true;
         return true;
       }
@@ -110,15 +132,19 @@ export class ProductComponent implements OnInit {
   }
 
   addNewItemToCart(p: product) {
+    this.CartItem={
+      
+      numberOfProducts: 1,
+      totalPrice: p.price,
+      user: this.user,
+      product: p
+    }
 
-    //post backend
-
-    this.CartItems?.push({
-      NumberOfProducts: 1,
-      TotalPrice: p.price,
-      User: this.user,
-      Product: p
+    this.httpServiceCart.addCartItem('/api/CarItem',this.CartItem).subscribe(res=>{
+      console.log(res.body)
     });
+
+    this.CartItems?.push(this.CartItem);
 
   }
 }

@@ -7,16 +7,20 @@
     <title>Shopping Cart</title>
 </head>
 <body>
-    <div class="container d-flex justify-content-center mt-50 mb-50 products">
+    <div class="container">
         <div class="row">
-          <div *ngFor="let CartItem of CartItems; let i = index" class="col-md-4 mt-2">
-                
-                    <div> {{CartItem.Product}}</div>
-                    <div>  {{CartItem.NumberOfProducts}}</div>
-                    <div>  {{CartItem.TotalPrice}}</div>
-                    
-                   
-                
+            <div class="col-6">
+                <!-- <div>{{TotalNumberOfProducts}}</div> -->
+                <div *ngFor="let CartItem of CartItems; let i = index" class="col-md-4 mt-2">
+                        
+                           <div>  {{GetProductName(CartItem)}}</div>
+                            
+                            <div>  {{CartItem.numberOfProducts}}</div>
+                            <div>  {{CartItem.totalPrice}}</div>
+                            
+                            
+                        
+                </div>   
          </div>
 
         </div>

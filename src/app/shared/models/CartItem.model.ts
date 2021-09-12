@@ -1,11 +1,12 @@
 import { product } from "./product.model";
+import { User } from "./User.models";
 
 export interface CartItem{
-    id :  number;
-    NumberOfProducts : number;
-    TotalPrice : number;
-    //User:User;
-    Product:product|null;
+    
+    numberOfProducts : number;
+    totalPrice : number;
+    user:User;
+    product:product;
 
 
 }

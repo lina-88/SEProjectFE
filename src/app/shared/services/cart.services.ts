@@ -12,6 +12,13 @@ export class CartService {
   constructor(private httpClient: HttpClient) { }
 
 
+  GetAllCartItems(url: string) {
+    return this.httpClient.get<CartItem[]>(this.baseUrl + url, {
+      observe:
+        'response'
+    })
+  }
+
   GetUserCartItems(url: string, UserId: number) {
     return this.httpClient.get<CartItem[]>(this.baseUrl + url + "/" + UserId, {
       observe:
@@ -26,13 +33,20 @@ export class CartService {
     })
   }
 
-
-  GetUserCartItemsProductsPage(url: string, UserId: number) {
-    return this.httpClient.get<CartItemProductsPage[]>(this.baseUrl + url + "/" + UserId, {
+  IncrementCartItem (url: string,userid:number,productid:number, CartItem: CartItem) {
+    return this.httpClient.put<CartItem>(this.baseUrl + url+"/"+userid+"/"+productid, CartItem, {
       observe:
         'response'
     })
   }
+
+
+  // GetUserCartItemsProductsPage(url: string, UserId: number) {
+  //   return this.httpClient.get<CartItemProductsPage[]>(this.baseUrl + url + "/" + UserId, {
+  //     observe:
+  //       'response'
+  //   })
+  // }
 
 
 }
