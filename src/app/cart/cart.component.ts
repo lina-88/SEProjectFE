@@ -34,6 +34,9 @@ export class CartComponent implements OnInit {
    GetProductName(CartItem: CartItem){
      return CartItem.product.name;
    }
+   GetTotalNumOfProducts(CartItems: CartItem[]){
+    return CartItems.length;
+  }
 
   //  AddCartItem(){
   //   this.httpService.addCartItem('/api/CarItem',this.CartItem).subscribe(res=>{

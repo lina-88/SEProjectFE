@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <!-- <div>{{TotalNumberOfProducts}}</div> -->
+                <!-- <div>{{GetTotalNumOfProducts(CartItems)}}</div> -->
                 <div *ngFor="let CartItem of CartItems; let i = index" class="col-md-4 mt-2">
                         
                            <div>  {{GetProductName(CartItem)}}</div>
