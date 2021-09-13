@@ -40,7 +40,18 @@ export class CartService {
     })
   }
 
-
+  DecrementCartItem (url: string,userid:number,productid:number, CartItem: CartItem) {
+    return this.httpClient.put<CartItem>(this.baseUrl + url+"/"+userid+"/"+productid, CartItem, {
+      observe:
+        'response'
+    })
+  }
+  DeleteCartItem (url: string,userid:number,productid:number) {
+    return this.httpClient.delete<CartItem>(this.baseUrl + url+"/"+userid+"/"+productid,{
+      observe:
+        'response'
+    })
+  }
   // GetUserCartItemsProductsPage(url: string, UserId: number) {
   //   return this.httpClient.get<CartItemProductsPage[]>(this.baseUrl + url + "/" + UserId, {
   //     observe:
