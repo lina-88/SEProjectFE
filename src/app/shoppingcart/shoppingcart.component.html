@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    
+    
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div class="row">
+      
+
+        <div class="col-lg-10 col-md-10"><div class="container">
+             <div class="content">
+                <div>You have {{GetTotalNumCartItems()}} in you shopping cart.</div>
+                <div>testing</div>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let CartItem of CartItems; let i = index">
+                          <th scope="row">1</th>
+                        <td >
+                            <div style="height:40px; overflow:hidden">
+                                <img src={{GetProductPicture(CartItem)}} class="card-img img-fluid"
+                                width="15" height="15" alt="">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height:40px; overflow:hidden">
+                            {{GetProductName(CartItem)}}
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height:40px; overflow:hidden">
+                            <button (click)="IncrementItem(CartItem)">+</button>{{GetTotalNum(CartItem)}}<button (click)="DecrementtItem(CartItem)">-</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height:40px; overflow:hidden">
+                            ${{GetProductPrice(CartItem)}}
+                            </div>
+                        </td>
+                      </tr>
+                     <div>Total Price ${{GetTotalPrice()}}</div>
+                     
+                    </tbody>
+                  </table>
+         
+              </div>  
+             </div>
+        </div>
+
+    </div>
+</body>
+</html>

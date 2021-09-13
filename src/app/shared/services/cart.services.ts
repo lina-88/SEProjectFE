@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/CartItem.model';
-import { CartItemProductsPage } from '../models/CartItemProductsPage.models';
+
 
 
 @Injectable({
@@ -33,12 +33,19 @@ export class CartService {
     })
   }
 
+  UpdateCartItem (url: string,userid:number,productid:number, CartItem: CartItem) {
+    return this.httpClient.put<CartItem>(this.baseUrl + url+"/"+userid+"/"+productid, CartItem, {
+      observe:
+        'response'
+    })
+  }
   IncrementCartItem (url: string,userid:number,productid:number, CartItem: CartItem) {
     return this.httpClient.put<CartItem>(this.baseUrl + url+"/"+userid+"/"+productid, CartItem, {
       observe:
         'response'
     })
   }
+
 
   DecrementCartItem (url: string,userid:number,productid:number, CartItem: CartItem) {
     return this.httpClient.put<CartItem>(this.baseUrl + url+"/"+userid+"/"+productid, CartItem, {
@@ -52,12 +59,7 @@ export class CartService {
         'response'
     })
   }
-  // GetUserCartItemsProductsPage(url: string, UserId: number) {
-  //   return this.httpClient.get<CartItemProductsPage[]>(this.baseUrl + url + "/" + UserId, {
-  //     observe:
-  //       'response'
-  //   })
-  // }
+ 
 
 
 }

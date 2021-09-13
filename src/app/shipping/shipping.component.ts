@@ -24,6 +24,8 @@ export class ShippingComponent implements OnInit {
     address : "",
     city : "" ,
   };
+
+
  
   
 
@@ -63,6 +65,8 @@ export class ShippingComponent implements OnInit {
   resetForm(){
     this.form.reset();
   }
+
+ 
  
 }
 
