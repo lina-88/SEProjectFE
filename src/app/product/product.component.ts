@@ -3,7 +3,6 @@ import { CartItem } from '../shared/models/CartItem.model';
 import { product } from '../shared/models/product.model';
 import { ProductService } from '../shared/services/product.service';
 import { CartService } from '../shared/services/cart.services';
-import { CartItemProductsPage } from '../shared/models/CartItemProductsPage.models';
 import { User } from '../shared/models/User.models';
 
 
@@ -106,7 +105,7 @@ export class ProductComponent implements OnInit {
           (this.CartItems![this.i]).totalPrice = (this.CartItems![this.i]).totalPrice + p.price;
           
           //put backend
-          this.httpServiceCart.IncrementCartItem('/api/CarItem',this.user.Id,p.id,this.CartItem).subscribe(res=>{
+          this.httpServiceCart.UpdateCartItem('/api/CarItem',this.user.Id,p.id,this.CartItem).subscribe(res=>{
             console.log(res.body)
           });
           
