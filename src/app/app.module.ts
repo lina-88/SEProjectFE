@@ -9,13 +9,17 @@ import { ProductComponent } from './product/product.component';
 
 import { ShippingComponent } from './shipping/shipping.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { UserComponent } from './user/user.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     ShippingComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    UserComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

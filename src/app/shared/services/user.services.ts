@@ -12,6 +12,12 @@ export class UserService {
 
 
   
+  GetAllUsers(url: string) {
+    return this.httpClient.get<User[]>(this.baseUrl + url,  {
+      observe:
+        'response'
+    })
+  }
 
  
   PostNewUser(url: string, User: User) {
