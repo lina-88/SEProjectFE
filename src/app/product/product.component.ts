@@ -3,7 +3,6 @@ import { CartItem } from '../shared/models/CartItem.model';
 import { product } from '../shared/models/product.model';
 import { ProductService } from '../shared/services/product.service';
 import { CartService } from '../shared/services/cart.services';
-import { CartItemProductsPage } from '../shared/models/CartItemProductsPage.models';
 import { User } from '../shared/models/User.models';
 import { ThrowStmt } from '@angular/compiler';
 
