@@ -7,6 +7,8 @@ import { User } from '../shared/models/User.models';
 import { CartService } from '../shared/services/cart.services';
 import { ProductService } from '../shared/services/product.service';
 
+
+
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
@@ -40,6 +42,22 @@ export class ShoppingcartComponent implements OnInit {
      category : "",
    }
   }
+  ToBeEditedCartItem:CartItem={
+    numberOfProducts : 0,
+    totalPrice : 0,
+    user:{   Id : 0,
+      name : "",
+      address : "",
+      city : "" ,},
+    product:{
+      id :  0,
+      name : "",
+      price : 0,
+      picture : "",
+      category : "",
+    }
+  }
+
  
 
  
@@ -68,56 +86,79 @@ export class ShoppingcartComponent implements OnInit {
    return CartItem.totalPrice;
  }
  GetTotalPrice(){
-   this.CartItems?.forEach(CartItem => {
-     this.TotalCartPrice=this.TotalCartPrice+CartItem.totalPrice;
-     
-   });
-   return this.TotalCartPrice;
+     if(this.TotalCartPrice===0){
+     for (var i=0;i<this.CartItems!.length;i++ ){
+          this.TotalCartPrice=this.TotalCartPrice+this.CartItems![i].totalPrice;
+       }
+
+     }
+     return this.TotalCartPrice;
+
  }
 
  IncrementItem(CartItem: CartItem){
-      
+   
       for(var i=0;i<this.CartItems!.length;i++){
-          if(this.CartItems![i].product.id===CartItem.product.id)
+          if(this.CartItems![i].product.id===CartItem.product.id){
+           this.ToBeEditedCartItem=CartItem;
            this.CartItems?.splice(i,1);
+          
+          }
       }
-      this.UpdatedCartItem.numberOfProducts=CartItem.numberOfProducts+1;
+      this.TotalCartPrice=this.TotalCartPrice+this.ToBeEditedCartItem.product.price;
+      this.UpdatedCartItem.numberOfProducts=this.ToBeEditedCartItem.numberOfProducts+1;
       this.UpdatedCartItem.UserId=this.User.Id;
-      this.UpdatedCartItem.ProductId=CartItem.product.id;
-      this.UpdatedCartItem.product=CartItem.product;
-      this.UpdatedCartItem.user=CartItem.user;
-      this.UpdatedCartItem.totalPrice=CartItem.totalPrice+CartItem.product.price;
+      this.UpdatedCartItem.ProductId=this.ToBeEditedCartItem.product.id;
+      this.UpdatedCartItem.product=this.ToBeEditedCartItem.product;
+      this.UpdatedCartItem.user=this.ToBeEditedCartItem.user;
+      this.UpdatedCartItem.totalPrice=this.ToBeEditedCartItem.totalPrice+this.ToBeEditedCartItem.product.price;
       this.CartItems?.push(this.UpdatedCartItem);
-      console.log(this.UpdatedCartItem);
+      // this.CartItems?.splice(i, 0, this.UpdatedCartItem);
+      
+     
       this.httpService.UpdateCartItem('/api/CartItem',this.UpdatedCartItem.UserId,this.UpdatedCartItem.ProductId,this.UpdatedCartItem).subscribe( res => {console.log(res.body)});
      
-      return;
+      window.location.reload();
   
       
-     
-
- }
+}
  DecrementtItem(CartItem: CartItem){
-   for(var i=0;i<this.CartItems!.length;i++){
-     if(this.CartItems![i].product.id==CartItem.product.id)
-      this.CartItems?.splice(i,1);
- }
-   this.UpdatedCartItem.numberOfProducts=CartItem.numberOfProducts-1;
-   this.UpdatedCartItem.UserId=this.User.Id;
-  this.UpdatedCartItem.ProductId=CartItem.product.id;
-   this.UpdatedCartItem.product=CartItem.product;
-   this.UpdatedCartItem.user=CartItem.user;
-   this.UpdatedCartItem.totalPrice=CartItem.totalPrice-CartItem.product.price;
-   this.CartItems?.push(this.UpdatedCartItem);
-   console.log(this.UpdatedCartItem);
-   this.httpService.UpdateCartItem('/api/CartItem',this.UpdatedCartItem.UserId,this.UpdatedCartItem.ProductId,this.UpdatedCartItem).subscribe( res => {console.log(res.body)});
-   return;
+  
+  for(var i=0;i<this.CartItems!.length;i++){
+    if(this.CartItems![i].product.id===CartItem.product.id){
+     this.ToBeEditedCartItem=CartItem;
+     this.CartItems?.splice(i,1);
+    }
+}
+    if(this.ToBeEditedCartItem.numberOfProducts===1)
+    {
+      this.httpService.DeleteCartItem('/api/CartItem',this.User.Id,this.ToBeEditedCartItem.product.id).subscribe( res => {console.log(res.body)});
+      window.location.reload();
+    }
+    else{
+    this.TotalCartPrice=this.TotalCartPrice-this.ToBeEditedCartItem.product.price;
+    this.UpdatedCartItem.numberOfProducts=this.ToBeEditedCartItem.numberOfProducts-1;
+    this.UpdatedCartItem.UserId=this.User.Id;
+    this.UpdatedCartItem.ProductId=this.ToBeEditedCartItem.product.id;
+    this.UpdatedCartItem.product=this.ToBeEditedCartItem.product;
+    this.UpdatedCartItem.user=this.ToBeEditedCartItem.user;
+    this.UpdatedCartItem.totalPrice=this.ToBeEditedCartItem.totalPrice-this.ToBeEditedCartItem.product.price;
+    this.CartItems?.push(this.UpdatedCartItem);
 
+    this.httpService.UpdateCartItem('/api/CartItem',this.UpdatedCartItem.UserId,this.UpdatedCartItem.ProductId,this.UpdatedCartItem).subscribe( res => {console.log(res.body)});
+
+    window.location.reload();
+    }
 
 }
 
-OnCheckout(){
- //go to shipping page
+ClearCart(){
+    this.CartItems?.forEach(ci => {
+    this.httpService.DeleteCartItem('/api/CartItem',this.User.Id,ci.product.id).subscribe( res => {console.log(res.body)});
+
+   });
+   this.CartItems=[];
+   this.TotalCartPrice=0;
 }
 
 }
