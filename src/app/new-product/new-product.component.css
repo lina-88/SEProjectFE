@@ -1,0 +1,49 @@
+body {  
+    padding-top: 7%; 
+
+}
+h2{
+    position: relative;
+    margin-left:24% ;
+    padding-top: 20px;
+}
+.alert{
+    margin-top: 15px; 
+    margin-left: 20%;
+    width: 60%;
+    padding: 10px;
+}
+input.ng-invalid.ng-touched{
+    border: 1px solid #ce5a5a;
+   }
+.error-text{
+    color: #ce5a5a;
+   }
+.form-submit{
+    margin:0 0.2rem;
+}
+input.ng-invalid.ng-touched{
+    border: 1px solid #ce5a5a;
+}
+
+form{   
+    margin-left: 14%;
+    width : 70%;
+    font-size: larger;
+    padding-bottom: 20px;
+}
+
+.newProduct{
+    background-color: #f8f9fa;
+    margin: auto;
+    width: 35%;
+    border: 0.5px;
+    border-style: outset;
+    border-color: #343a40;
+
+}
+.btn{
+    font-size: medium;
+    margin-top: 15px;
+    width : 100%;
+}

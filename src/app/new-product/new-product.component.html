@@ -1,0 +1,50 @@
+
+<body>
+    <div *ngIf="!add" class="row" >
+        <div class="col-xs-12">
+          <p class="alert alert-success">
+              <strong>Product Added Successfully!</strong>.
+
+          </p>
+        </div>
+      </div>
+    <div  class="newProduct">
+    
+    <h2 *ngIf="add">Add New Product</h2>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="add">
+        <div class="mb-3">
+            <label for="nameInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="nameInput" [ngModel]="name.value |lowercase" name="name"
+            required #name="ngModel" placeholder="Milk">
+            <span class="error-text" *ngIf="!name.valid && name.touched">Name is required</span>
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="priceInput" class="form-label">Price ($)</label>
+            <input type="number" class="form-control" id="priceInput" ngModel name="price" required #price="ngModel"
+            placeholder="0.00" >
+            <span class="error-text" *ngIf="!price.valid && price.touched">Price is required</span>
+        </div>
+        <div class="mb-3">
+            <label for="pictureInput" class="form-label">Picture</label>
+            <input type="text" class="form-control" id="pictureInput" ngModel name="picture" required
+            #picture="ngModel">
+            <span class="error-text" *ngIf="!picture.valid && picture.touched">Picture is required</span>
+        </div>
+        <div class="mb-3">
+            <label for="categoryInput" class="form-label">Category</label>
+            <select id="categoryInput" name="category" ngModel class="form-control" required #category="ngModel">
+                <option value="Bread">Bread</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Seasonings and Spices">Seasonings and Spices</option>
+            </select>
+            <span class="error-text" *ngIf="!category.valid && category.touched">Category is required</span>
+        </div>
+        
+        <button type="submit" class="btn btn-primary " [disabled]="!f.valid">Submit</button>
+    </form>
+</div>    
+
+</body>
+

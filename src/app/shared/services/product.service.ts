@@ -14,8 +14,8 @@ export class ProductService {
       observe:'response'
     })
   }
-  addProduct(url: string, product: product) {
-    return this.httpClient.post<product[]>(this.baseUrl + url, product, { observe:
+  addProduct(url: string, _json: { name: any; price: any; picture: any; category: any; } ) {
+    return this.httpClient.post<product[]>(this.baseUrl + url, _json, { observe:
    'response' })
     }
 }

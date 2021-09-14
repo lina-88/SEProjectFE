@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
 
 import { ShippingComponent } from './shipping/shipping.component';
+
+import { NewProductComponent } from './new-product/new-product.component';
+import { HomepageComponent } from './homepage/homepage.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,6 +19,10 @@ import { RegisterComponent } from './register/register.component';
   declarations: [
     AppComponent,
     ProductComponent,
+    CartComponent,
+    ShippingComponent,
+    NewProductComponent,
+    HomepageComponent
     ShippingComponent,
     ShoppingcartComponent,
     UserComponent,
