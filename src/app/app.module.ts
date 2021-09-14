@@ -19,11 +19,9 @@ import { RegisterComponent } from './register/register.component';
   declarations: [
     AppComponent,
     ProductComponent,
-    CartComponent,
     ShippingComponent,
     NewProductComponent,
-    HomepageComponent
-    ShippingComponent,
+    HomepageComponent,
     ShoppingcartComponent,
     UserComponent,
     RegisterComponent

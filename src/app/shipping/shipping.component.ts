@@ -15,7 +15,7 @@ export class ShippingComponent implements OnInit {
   @ViewChild('f') form!:NgForm
 
   CartItems : CartItem[] | null  = [];
-   UserId=2;
+   UserId=1;
    TotalCartPrice:number=0;
 
    PostedUser:User={
