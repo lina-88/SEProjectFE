@@ -24,6 +24,7 @@ export class ShippingComponent implements OnInit {
     address : "",
     city : "" ,
   };
+  message:string="";
 
 
  
@@ -63,7 +64,7 @@ export class ShippingComponent implements OnInit {
        console.log(res.body)
      });
   
-  
+  this.message="User information saved successfully";
     
   }
   resetForm(){

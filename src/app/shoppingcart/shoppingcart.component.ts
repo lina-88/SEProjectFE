@@ -98,56 +98,65 @@ export class ShoppingcartComponent implements OnInit {
 
  IncrementItem(CartItem: CartItem){
    
+
       for(var i=0;i<this.CartItems!.length;i++){
           if(this.CartItems![i].product.id===CartItem.product.id){
-           this.ToBeEditedCartItem=CartItem;
-           this.CartItems?.splice(i,1);
+             this.CartItems![i].numberOfProducts=this.CartItems![i].numberOfProducts+1;
+             this.CartItems![i].totalPrice=this.CartItems![i].totalPrice+CartItem.product.price;
+             this.ToBeEditedCartItem=this.CartItems![i];
           
           }
       }
       this.TotalCartPrice=this.TotalCartPrice+this.ToBeEditedCartItem.product.price;
-      this.UpdatedCartItem.numberOfProducts=this.ToBeEditedCartItem.numberOfProducts+1;
+      this.UpdatedCartItem.numberOfProducts=this.ToBeEditedCartItem.numberOfProducts;
       this.UpdatedCartItem.UserId=this.User.Id;
       this.UpdatedCartItem.ProductId=this.ToBeEditedCartItem.product.id;
       this.UpdatedCartItem.product=this.ToBeEditedCartItem.product;
       this.UpdatedCartItem.user=this.ToBeEditedCartItem.user;
-      this.UpdatedCartItem.totalPrice=this.ToBeEditedCartItem.totalPrice+this.ToBeEditedCartItem.product.price;
-      this.CartItems?.push(this.UpdatedCartItem);
-      // this.CartItems?.splice(i, 0, this.UpdatedCartItem);
+      this.UpdatedCartItem.totalPrice=this.ToBeEditedCartItem.totalPrice;
+      
       
      
       this.httpService.UpdateCartItem('/api/CartItem',this.UpdatedCartItem.UserId,this.UpdatedCartItem.ProductId,this.UpdatedCartItem).subscribe( res => {console.log(res.body)});
      
       window.location.reload();
+
+
+      
+
   
       
 }
  DecrementtItem(CartItem: CartItem){
   
+ 
   for(var i=0;i<this.CartItems!.length;i++){
     if(this.CartItems![i].product.id===CartItem.product.id){
-     this.ToBeEditedCartItem=CartItem;
-     this.CartItems?.splice(i,1);
+       this.CartItems![i].numberOfProducts=this.CartItems![i].numberOfProducts-1;
+       this.CartItems![i].totalPrice=this.CartItems![i].totalPrice-CartItem.product.price;
+       this.ToBeEditedCartItem=this.CartItems![i];
+    
     }
 }
-    if(this.ToBeEditedCartItem.numberOfProducts===1)
+    if(this.ToBeEditedCartItem.numberOfProducts===0)
     {
       this.httpService.DeleteCartItem('/api/CartItem',this.User.Id,this.ToBeEditedCartItem.product.id).subscribe( res => {console.log(res.body)});
       window.location.reload();
     }
     else{
-    this.TotalCartPrice=this.TotalCartPrice-this.ToBeEditedCartItem.product.price;
-    this.UpdatedCartItem.numberOfProducts=this.ToBeEditedCartItem.numberOfProducts-1;
-    this.UpdatedCartItem.UserId=this.User.Id;
-    this.UpdatedCartItem.ProductId=this.ToBeEditedCartItem.product.id;
-    this.UpdatedCartItem.product=this.ToBeEditedCartItem.product;
-    this.UpdatedCartItem.user=this.ToBeEditedCartItem.user;
-    this.UpdatedCartItem.totalPrice=this.ToBeEditedCartItem.totalPrice-this.ToBeEditedCartItem.product.price;
-    this.CartItems?.push(this.UpdatedCartItem);
-
-    this.httpService.UpdateCartItem('/api/CartItem',this.UpdatedCartItem.UserId,this.UpdatedCartItem.ProductId,this.UpdatedCartItem).subscribe( res => {console.log(res.body)});
-
-    window.location.reload();
+      this.TotalCartPrice=this.TotalCartPrice+this.ToBeEditedCartItem.product.price;
+      this.UpdatedCartItem.numberOfProducts=this.ToBeEditedCartItem.numberOfProducts;
+      this.UpdatedCartItem.UserId=this.User.Id;
+      this.UpdatedCartItem.ProductId=this.ToBeEditedCartItem.product.id;
+      this.UpdatedCartItem.product=this.ToBeEditedCartItem.product;
+      this.UpdatedCartItem.user=this.ToBeEditedCartItem.user;
+      this.UpdatedCartItem.totalPrice=this.ToBeEditedCartItem.totalPrice;
+      
+      
+     
+      this.httpService.UpdateCartItem('/api/CartItem',this.UpdatedCartItem.UserId,this.UpdatedCartItem.ProductId,this.UpdatedCartItem).subscribe( res => {console.log(res.body)});
+     
+      window.location.reload();
     }
 
 }

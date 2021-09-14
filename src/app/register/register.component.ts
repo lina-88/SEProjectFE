@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   };
 
   AllUsers:User[]|null=[];
+  message:string="";
 
   constructor(private httpUserService: UserService) { }
 
@@ -49,7 +50,7 @@ export class RegisterComponent implements OnInit {
      });
      }
      
-    
+    this.message="User is registered successfully";
   }
    
 
