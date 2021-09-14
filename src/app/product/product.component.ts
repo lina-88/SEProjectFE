@@ -89,7 +89,9 @@ export class ProductComponent implements OnInit {
 
           this.httpServiceCart.DecrementCartItem('/api/CartItem', this.user.Id, p.id, this.CartItem).subscribe(res => { console.log(res.body) });
 
+
           this.CartItems?.push(this.CartItem);
+
           return;
         }
       }

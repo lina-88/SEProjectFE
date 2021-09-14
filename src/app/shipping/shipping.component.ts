@@ -24,6 +24,8 @@ export class ShippingComponent implements OnInit {
     address : "",
     city : "" ,
   };
+
+
  
   
 
@@ -42,9 +44,13 @@ export class ShippingComponent implements OnInit {
   }
 
   GetTotalPrice(){
-    this.CartItems?.forEach(item => {
-      this.TotalCartPrice=this.TotalCartPrice+(item.totalPrice);
-    });
+    if(this.TotalCartPrice===0){
+      for (var i=0;i<this.CartItems!.length;i++ ){
+           this.TotalCartPrice=this.TotalCartPrice+this.CartItems![i].totalPrice;
+        }
+ 
+      }
+      return this.TotalCartPrice;
   }
   
   onSubmit(){
@@ -63,6 +69,8 @@ export class ShippingComponent implements OnInit {
   resetForm(){
     this.form.reset();
   }
+
+ 
  
 }
 

@@ -6,10 +6,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
-import { CartComponent } from './cart/cart.component';
+
 import { ShippingComponent } from './shipping/shipping.component';
+
 import { NewProductComponent } from './new-product/new-product.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { UserComponent } from './user/user.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,10 @@ import { HomepageComponent } from './homepage/homepage.component';
     ShippingComponent,
     NewProductComponent,
     HomepageComponent
+    ShippingComponent,
+    ShoppingcartComponent,
+    UserComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
