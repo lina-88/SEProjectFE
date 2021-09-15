@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="shipping.css">
 </head>
 <body>
-    <h1>Shipping</h1>
+    <h1 style="margin-top: 60px;">Shipping</h1>
     <div class="row">
       
        
         <div class="col-lg-6" id="div3">
-            <div  class="container">
-            <div class="title" >User Info</div>
+            <div  class="container" style="background-color: #F8F9FA;">
+            <div class="title" style="font-size: 1.5em;" >User Info</div>
             <div class="content">
                 <form (ngSubmit)="onSubmit()" #f="ngForm">
     
@@ -54,7 +54,7 @@
                     <span class="error-message" *ngIf="!city.valid && city.touched">gpa required</span>
                  
                   </div>
-            <button type="submit" class="btn btn-primary " [disabled]="!f.valid">Submit</button>
+            <button type="submit" class="btn btn-primary " [disabled]="!f.valid">Place Order</button>
             <button type="button" class="btn btn-danger " (click)="resetForm()" >Reset</button>
         
              </form>
@@ -68,17 +68,17 @@
 
 
         <div class="col-lg-6 col-md-6"><div class="container">
-            <div class="title" >Order Summary</div>
+            <div class="title" style="font-size: 1.5em;">Order Summary</div>
              <div class="content">
            <div>You have {{GetTotalNumOfProducts()}} items in your shopping cart</div>
-           <div *ngFor="let CartItem of CartItems; let i = index" class="col-md-4 mt-2">
+           <div *ngFor="let CartItem of CartItems; let i = index">
               <hr>          
-            <div>  {{CartItem.numberOfProducts}} * {{GetProductName(CartItem)}}  {{CartItem.totalPrice}}$</div>
+            <div>  {{CartItem.numberOfProducts}} x {{GetProductName(CartItem)}} <span style="float: right;color:black ;">{{CartItem.totalPrice}}$</span> </div>
              
             
             </div>
             <hr>
-            <div>Total {{GetTotalPrice()}} $</div>
+            <div style="font-weight: bold;">Total <span style="float: right;color:black ;">{{GetTotalPrice()}} $</span></div>
          
               </div>  
              </div>
